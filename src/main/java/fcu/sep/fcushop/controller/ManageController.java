@@ -2,6 +2,7 @@ package fcu.sep.fcushop.controller;
 
 import fcu.sep.fcushop.database.Sql2oDbHandler;
 import fcu.sep.fcushop.model.Product;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sql2o.Connection;
+
 
 
 /**
@@ -26,10 +28,18 @@ public class ManageController {
    */
   @Controller
   public class OneController {
-    @RequestMapping("/manageFile")
-    public String manageFile() {
-      return "redirect:/manageFile.html";
+
+    @RequestMapping("/modifyFile")
+    public String modifyFile() {
+      return "redirect:/modifyFile.html";
     }
+
+    @RequestMapping("/addFile")
+    public String addFile() {
+      return "redirect:/addFile.html";
+    }
+
+
   }
 
   /**
@@ -61,6 +71,28 @@ public class ManageController {
             .executeUpdate();
       }
 
+      return "redirect:/index.html";
+    }
+
+    @PostMapping("/modifyFile")
+    public String modifyData(HttpServletRequest request) {
+      String oldName = request.getParameter("oldName");
+      String newName = request.getParameter("newName");
+      String imageUrl = request.getParameter("imageUrl");
+      String price = request.getParameter("price");
+      String description = request.getParameter("description");
+      try (Connection connection = sql2oDbHandler.getConnector().open()) {
+        String query = "update product set `name` = :newName, image_url = :image_url,"
+                + " price = :price,description = :description"
+                + " where `name` = :oldName";
+        connection.createQuery(query)
+                  .addParameter("oldName", oldName)
+                  .addParameter("newName", newName)
+                  .addParameter("image_url", imageUrl)
+                  .addParameter("price", price)
+                  .addParameter("description", description)
+                  .executeUpdate();
+      }
       return "redirect:/index.html";
     }
   }

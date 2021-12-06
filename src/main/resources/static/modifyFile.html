@@ -9,16 +9,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="css/manageFile.css" rel="stylesheet"/>
-    <title>新增資料</title>
+    <title>修改資料</title>
 </head>
 <body>
-    <form modelAttribute="product" class="form" action="/addFile" method="post">
+    <form modelAttribute="product" class="form" action="/modifyFile" method="post">
+        <p>修改資料</p>
         <div class="mb-3">
-          <label for="name" class="form-label">商品名</label>
-          <input type="text" class="form-control" id="name" name="name">
+            <label for="oldName" class="form-label">原來的商品名</label>
+            <input type="text" class="form-control" id="oldName" name="oldName">
         </div>
         <div class="mb-3">
-          <label for="url" class="form-label">商品圖片（URL）</label>
+          <label for="newName" class="form-label">新的商品名</label>
+          <input type="text" class="form-control" id="newName" name="newName">
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">商品圖片（URL）</label>
           <input type="text" class="form-control" id="imageUrl" name="imageUrl">
         </div>
         <div class="mb-3">
@@ -30,7 +35,7 @@
             <input type="text" class="form-control" name="description" id="description">
         </div>
         <button type="submit" class="btn btn-primary" id="addFile">add data</button>
-    </div>
+    </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
