@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.sql2o.Connection;
 
+import java.util.List;
 
 
 /**
@@ -54,7 +56,34 @@ public class AccountController {
          * @ param data form login website.
          * @ return index.html;
          */
+        @PostMapping("/login")
+        public String loginDetect(@ModelAttribute("account") Account data, RedirectAttributes redirectAttributes) {
+            System.out.println("data : " + data);
 
+            System.out.println("ID : " + data.getId());
+            System.out.println("UserName : " + data.getUsername());
+            System.out.println("Password : " + data.getPassword());
+
+            try (Connection connection = sql2oDbHandler.getConnector().open()) {
+                String query = "SELECT * "
+                             + "FROM ACCOUNT "
+                             + "WHERE USERNAME = :username AND PASSWORD = :password";
+                List<Account> find = connection.createQuery(query)
+                        .addParameter("username", data.getUsername())
+                        .addParameter("password", data.getPassword())
+                        .executeAndFetch(Account.class);
+
+
+                if(!find.isEmpty()){
+                    redirectAttributes.addAttribute("username", data.getUsername());
+                    return "redirect:/index.html";
+                }else{
+                    return "redirect:/login.html";
+                }
+
+            }
+
+        }
 
         @PostMapping("/signUp")
         public String getNewAccountData(@ModelAttribute("account") Account data) {
