@@ -54,20 +54,18 @@ public class ManageController {
      * @ return index.html;
      */
     @PostMapping("/addFile")
-     public String getNewData(@ModelAttribute("product") Product data) {
-      System.out.println(data.getId());
-      System.out.println(data.getName());
-      System.out.println(data.getImageUrl());
-      System.out.println(data.getDescription());
-      System.out.println(data.getPrice());
+     public String getNewData(HttpServletRequest request) {
+        System.out.println("addFile function");
+
+
       try (Connection connection = sql2oDbHandler.getConnector().open()) {
         String query = "insert into product (id,name,image_url,price,description)"
                         + "values(NULL,:name,:image_url,:price,:description)";
         connection.createQuery(query)
-            .addParameter("name", data.getName())
-            .addParameter("image_url", data.getImageUrl())
-            .addParameter("price", data.getPrice())
-            .addParameter("description", data.getDescription())
+            .addParameter("name", request.getParameter("name"))
+            .addParameter("image_url", request.getParameter("imageUrl"))
+            .addParameter("price", request.getParameter("price"))
+            .addParameter("description", request.getParameter("description"))
             .executeUpdate();
       }
 

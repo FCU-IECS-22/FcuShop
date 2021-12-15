@@ -27,30 +27,19 @@
           <input type="text" class="form-control" id="imageUrl" name="imageUrl">
         </div>
         <div class="mb-3">
-            <label for="prize" class="form-label">價錢</label>
-            <input type="number" class="form-control" name="price" id="prize">
+            <label for="price" class="form-label">價錢</label>
+            <input type="number" class="form-control" name="price" id="price">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">商品敘述</label>
             <input type="text" class="form-control" name="description" id="description">
         </div>
-        <button type="submit" class="btn btn-primary" id="addFile">add data</button>
+        <button type="submit" class="btn btn-primary" id="modifyFile">add data</button>
     </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-    $("#addFile").click(function(){
-        const data = {
-            name: $("#name").val(),
-            imageUrl: $("#imageUrl").val(),
-            prize: $("#prize").val(),
-            description: $("#description").val()
-        };
-        console.log(data);
-    })
-
-
 </script>
 
 </body>
