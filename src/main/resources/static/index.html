@@ -32,36 +32,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">一中商城</a>
                 </li>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        商品選單
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a href="addFile" class="dropdown-item">增加商品</a></li>
-                        <li><a href="modifyFile" class="dropdown-item">修改商品</a></li>
-                    </ul>
-                </div>
+                <div id="itemManageButton">
+
 
             </ul>
 
 
-            <ul class="navbar-nav mb-2 mb-lg-0 d-flex not-login">
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">登入</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/signUp">註冊</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav mb-2 mb-lg-0 d-flex is-login">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">會員中心</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">購物車(0)</a>
-                </li>
-            </ul>
+            <ul id="member">
 
 
         </div>
@@ -95,11 +72,68 @@
 -->
 
 <script>
+
+
+const showMember = function(){
+    let getUsername = localStorage.getItem("username")
+    console.log("hi : " + getUsername)
+    let html = '<ul class="navbar-nav mb-2 mb-lg-0 d-flex">';
+
+    if(getUsername){
+         html += '<li class="nav-item">'
+         html += '<a class="nav-link">你好，' + getUsername + '</a>'
+         html += '</li>'
+    }
+
+    html += '<li class="nav-item">'
+    if(getUsername){
+        html += '<a class="nav-link" href="#">會員中心</a>'
+    }else{
+        html += '<a class="nav-link" href="/login">登入</a>'
+    }
+    html += '</li>'
+
+    html += '<li class="nav-item">'
+    if(getUsername){
+        html += '<a class="nav-link" href="#">購物車(0)</a>'
+
+        html += '<li class="nav-item">'
+        html += '<a id="logOut" class="nav-link" href="/">登出</a>'
+        html += '</li>'
+    }else{
+        html += '<a class="nav-link" href="/signUp">註冊</a>'
+    }
+    html += '</li>'
+
+    html += '</ul>'
+    $("#member").append(html)
+
+    $("#logOut").click(function(){
+        localStorage.removeItem("username");
+
+        console.log("hi")
+    })
+}
+
+const showItemManageButton = function(){
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            商品選單
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a href="addFile" class="dropdown-item">增加商品</a></li>
+            <li><a href="modifyFile" class="dropdown-item">修改商品</a></li>
+        </ul>
+    </div>
+}
+
 $( document ).ready( function() {
     console.log( "ready!" );
     emptyProducts();
+    showMember();
+
     getProducts('products')
-  });
+});
 
     $('#searchProduct').click(function() {
       const keyword = $('#productKeyword').val();
