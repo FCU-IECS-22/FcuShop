@@ -128,7 +128,8 @@ $( document ).ready( function() {
         html += '<div class="card-body">';
         html += '<h5 class="card-title">' + product.name + '</h5>';
         html += '<p class="card-text">' + product.description + '</p>';
-        html += '<a href="#" class="btn btn-primary">' + product.price + '</a>';
+        html += '<a href="#" class="btn btn-primary me-md-2">' + product.price + '</a>';
+        html += '<a href="modifyFile" class="btn btn-danger">'+"修改"+'</a>';
         html += '</div>';
         html += '</div>';
         $('#productList').append(html);
