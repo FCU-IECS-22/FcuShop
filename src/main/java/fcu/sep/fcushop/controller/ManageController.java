@@ -5,10 +5,8 @@ import fcu.sep.fcushop.model.Product;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.*;
 import org.sql2o.Connection;
 
 
@@ -17,6 +15,7 @@ import org.sql2o.Connection;
  * This is class ManageController.
  */
 @RestController
+@CrossOrigin
 public class ManageController {
 
   @Autowired
@@ -46,6 +45,7 @@ public class ManageController {
    *  This is class TwoController.
    */
   @Controller
+  @CrossOrigin("http://localhost:8081")
   public class TwoController {
 
     /**
