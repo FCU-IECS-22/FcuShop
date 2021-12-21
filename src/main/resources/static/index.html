@@ -80,6 +80,7 @@ const showMember = function(){
     let html = '<ul class="navbar-nav mb-2 mb-lg-0 d-flex">';
 
     if(getUsername){
+
          html += '<li class="nav-item">'
          html += '<a class="nav-link">你好，' + getUsername + '</a>'
          html += '</li>'
@@ -107,7 +108,12 @@ const showMember = function(){
 
     html += '</ul>'
     $("#member").append(html)
-
+    if(getUsername){
+        showItemManageButton();
+    }else{
+        let html = ''
+        $("#itemManageButton").append(html);
+    }
     $("#logOut").click(function(){
         localStorage.removeItem("username");
 
@@ -116,15 +122,15 @@ const showMember = function(){
 }
 
 const showItemManageButton = function(){
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            商品選單
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a href="addFile" class="dropdown-item">增加商品</a></li>
-            <li><a href="modifyFile" class="dropdown-item">修改商品</a></li>
-        </ul>
-    </div>
+
+    let html = '<div class="dropdown">'
+    html += '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">'
+    html += '商品選單</button>'
+    html += '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">'
+    html += '<li><a href="addFile" class="dropdown-item">增加商品</a></li>'
+    html += '<li><a href="modifyFile" class="dropdown-item">修改商品</a></li>'
+    html += '</ul></div>'
+    $("#itemManageButton").append(html);
 }
 
 $( document ).ready( function() {
