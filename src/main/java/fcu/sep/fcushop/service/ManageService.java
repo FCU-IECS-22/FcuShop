@@ -24,7 +24,7 @@ public class ManageService {
 
     public Connection deleteData(@RequestBody Map params) {
         String id = params.get("id").toString();
-
+        System.out.println("deleteDataService : " + id);
         try (Connection connection = sql2oDbHandler.getConnector().open()) {
             String query = "DELETE FROM product WHERE id = :id";
             return connection.createQuery(query)

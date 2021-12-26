@@ -44,11 +44,6 @@ public class ManageController {
       return "redirect:/addFile.html";
     }
 
-    @RequestMapping("/deleteFile")
-    public String deleteFile() {
-      return "redirect:/deleteFile.html";
-    }
-
   }
 
   /**
@@ -106,6 +101,7 @@ public class ManageController {
 
     @PostMapping("/deleteFile")
     public String deleteData(@RequestBody Map params) {
+      System.out.println("deleteDataController" + params.get("id").toString());
       manageService.deleteData(params);
 
       return "redirect:/index.html";
