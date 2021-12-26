@@ -3,12 +3,15 @@ package fcu.sep.fcushop.controller;
 import fcu.sep.fcushop.database.Sql2oDbHandler;
 import fcu.sep.fcushop.model.Product;
 import javax.servlet.http.HttpServletRequest;
+
+import fcu.sep.fcushop.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 import org.sql2o.Connection;
 
+import java.util.Map;
 
 
 /**
@@ -21,11 +24,14 @@ public class ManageController {
   @Autowired
   private Sql2oDbHandler sql2oDbHandler;
 
+  @Autowired
+  ManageService manageService;
 
   /**
    *  This is class OneController.
    */
   @Controller
+  @CrossOrigin
   public class OneController {
 
     @RequestMapping("/modifyFile")
@@ -38,6 +44,10 @@ public class ManageController {
       return "redirect:/addFile.html";
     }
 
+    @RequestMapping("/deleteFile")
+    public String deleteFile() {
+      return "redirect:/deleteFile.html";
+    }
 
   }
 
@@ -91,6 +101,13 @@ public class ManageController {
                   .addParameter("description", description)
                   .executeUpdate();
       }
+      return "redirect:/index.html";
+    }
+
+    @PostMapping("/deleteFile")
+    public String deleteData(@RequestBody Map params) {
+      manageService.deleteData(params);
+
       return "redirect:/index.html";
     }
   }
