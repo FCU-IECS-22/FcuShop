@@ -12,7 +12,7 @@
     <title>修改資料</title>
 </head>
 <body>
-    <form modelAttribute="product" class="form" action="/modifyFile" method="post">
+    <form modelAttribute="product" class="form" action="/edit" method="post">
         <p>修改資料</p>
         <div class="mb-3">
             <label for="oldName" class="form-label">原來的商品名</label>
@@ -34,7 +34,7 @@
             <label for="description" class="form-label">商品敘述</label>
             <input type="text" class="form-control" name="description" id="description">
         </div>
-        <button type="submit" class="btn btn-primary" id="modifyFile">add data</button>
+        <button type="submit" class="btn btn-primary" id="edit">add data</button>
     </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

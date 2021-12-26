@@ -4,7 +4,6 @@ import fcu.sep.fcushop.database.Sql2oDbHandler;
 import fcu.sep.fcushop.model.Product;
 import javax.servlet.http.HttpServletRequest;
 
-import fcu.sep.fcushop.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,8 +23,6 @@ public class ManageController {
   @Autowired
   private Sql2oDbHandler sql2oDbHandler;
 
-  @Autowired
-  ManageService manageService;
 
   /**
    *  This is class OneController.
@@ -44,13 +41,17 @@ public class ManageController {
       return "redirect:/addFile.html";
     }
 
+    @RequestMapping("/deleteFile")
+    public String deleteFile() {
+      return "redirect:/deleteFile.html";
+    }
   }
 
   /**
    *  This is class TwoController.
    */
   @Controller
-  @CrossOrigin("http://localhost:8081")
+  @CrossOrigin
   public class TwoController {
 
     /**
@@ -102,8 +103,7 @@ public class ManageController {
     @PostMapping("/deleteFile")
     public String deleteData(@RequestBody Map params) {
       String id = params.get("id").toString();
-      System.out.println("deleteDataController" + params.get("id").toString());
-      //manageService.deleteData(params);
+
       try (Connection connection = sql2oDbHandler.getConnector().open()) {
             String query = "DELETE FROM product WHERE id = :id";
             connection.createQuery(query)
