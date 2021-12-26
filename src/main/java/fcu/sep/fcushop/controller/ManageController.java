@@ -104,7 +104,7 @@ public class ManageController {
       System.out.println("deleteDataController" + params.get("id").toString());
       manageService.deleteData(params);
 
-      return "redirect:/index.html";
+      return "你好";
     }
   }
 }
