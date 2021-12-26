@@ -102,8 +102,13 @@ public class ManageController {
     @PostMapping("/deleteFile")
     public String deleteData(@RequestBody Map params) {
       System.out.println("deleteDataController" + params.get("id").toString());
-      manageService.deleteData(params);
-
+      //manageService.deleteData(params);
+      try (Connection connection = sql2oDbHandler.getConnector().open()) {
+            String query = "DELETE FROM product WHERE id = :id";
+            return connection.createQuery(query)
+                    .addParameter("id", id)
+                    .executeUpdate();
+      }
       return "你好";
     }
   }
