@@ -20,6 +20,19 @@ public class EditController {
   @Autowired
   private Sql2oDbHandler sql2oDbHandler;
 
+  @PostMapping("/deleteProduct")
+  public String deleteData(@RequestBody Map params) {
+    String id = params.get("id").toString();
+
+    try (Connection connection = sql2oDbHandler.getConnector().open()) {
+      String query = "DELETE FROM product WHERE id = :id";
+      connection.createQuery(query)
+              .addParameter("id", id)
+              .executeUpdate();
+    }
+    return "Good Delete";
+  }
+
   @PostMapping("/new")
   public String getNewData(@RequestBody Map params) {
 
@@ -39,7 +52,7 @@ public class EditController {
               .executeUpdate();
     }
 
-    return "Good";
+    return "Good Create";
   }
 
   @PostMapping("/edit")
@@ -65,7 +78,7 @@ public class EditController {
               .executeUpdate();
 
 
-      return "要傳啥？";
+      return "Good Edit";
     }
   }
 }
