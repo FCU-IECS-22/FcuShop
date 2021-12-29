@@ -100,7 +100,7 @@ public class ManageController {
       return "redirect:/index.html";
     }
 
-    @PostMapping("/deleteFile")
+    @PostMapping("/delete")
     public String deleteData(@RequestBody Map params) {
       String id = params.get("id").toString();
 
