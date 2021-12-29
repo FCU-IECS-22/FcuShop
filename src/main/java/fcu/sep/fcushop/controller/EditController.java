@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.sql2o.Connection;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
@@ -18,6 +19,28 @@ public class EditController {
 
   @Autowired
   private Sql2oDbHandler sql2oDbHandler;
+
+  @PostMapping("/new")
+  public String getNewData(@RequestBody Map params) {
+
+    String name = params.get("name").toString();
+    String imageUrl = params.get("imageUrl").toString();
+    String price = params.get("price").toString();
+    String description = params.get("description").toString();
+
+    try (Connection connection = sql2oDbHandler.getConnector().open()) {
+      String query = "insert into product (id,name,image_url,price,description)"
+              + "values(NULL,:name,:image_url,:price,:description)";
+      connection.createQuery(query)
+              .addParameter("name", name)
+              .addParameter("image_url", imageUrl)
+              .addParameter("price", price)
+              .addParameter("description", description)
+              .executeUpdate();
+    }
+
+    return "Good";
+  }
 
   @PostMapping("/edit")
   public String createProduct(@RequestBody Map params) {
