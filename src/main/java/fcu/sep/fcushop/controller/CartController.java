@@ -24,7 +24,7 @@ public class CartController {
         System.out.println(all);
 
         try (Connection connection = sql2oDbHandler.getConnector().open()) {
-          String query = "SELECT * FORM product WHERE ID = :id";
+          String query = "SELECT * FROM PRODUCT WHERE ID = :id";
           connection.createQuery(query)
                   .addParameter("id", all)
                   .executeUpdate();
