@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.sql2o.Connection;
 
 import java.util.Map;
 
@@ -22,13 +23,12 @@ public class CartController {
         Object all = params.get("cartItems").toString();
         System.out.println(all);
 
-//    try (Connection connection = sql2oDbHandler.getConnector().open()) {
-//      String query = "SELECT * FORM product WHERE ID = :id";
-//      connection.createQuery(query)
-//              .addParameter("username", data.getUsername())
-//              .addParameter("password", data.getPassword())
-//              .executeUpdate();
-//    }
+        try (Connection connection = sql2oDbHandler.getConnector().open()) {
+          String query = "SELECT * FORM product WHERE ID = :id";
+          connection.createQuery(query)
+                  .addParameter("id", all)
+                  .executeUpdate();
+        }
         return "hehe";
     }
 }
