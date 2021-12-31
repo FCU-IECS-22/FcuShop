@@ -26,12 +26,11 @@ public class CartController {
         System.out.println(all);
 
         try (Connection connection = sql2oDbHandler.getConnector().open()) {
-//          String query = "SELECT * FROM PRODUCT WHERE ID = :id";
-//          connection.createQuery(query)
-//                  .addParameter("id", all)
-//                  .executeUpdate();
+          String query = "SELECT * FROM PRODUCT WHERE JSON_CONTAINS(id, ID)";
+          Object find = connection.createQuery(query)
+                  .executeUpdate();
 
-          return all;
+          return find;
         }
 
     }
