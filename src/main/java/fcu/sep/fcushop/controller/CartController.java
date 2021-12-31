@@ -19,8 +19,10 @@ public class CartController {
     private Sql2oDbHandler sql2oDbHandler;
 
     @PostMapping("/productsOfCart")
-    public String getProductsOfCart(@RequestBody Map params) {
-        Object all = params.get("cartItems").toString();
+    public Object getProductsOfCart(@RequestBody Map params) {
+        Object all = params.get("cartItems");
+
+        System.out.println("cartItems : ");
         System.out.println(all);
 
         try (Connection connection = sql2oDbHandler.getConnector().open()) {
@@ -29,6 +31,6 @@ public class CartController {
                   .addParameter("id", all)
                   .executeUpdate();
         }
-        return "hehe";
+        return all;
     }
 }
