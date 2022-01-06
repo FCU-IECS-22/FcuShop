@@ -1,13 +1,11 @@
 package fcu.sep.fcushop.controller;
 
 import fcu.sep.fcushop.database.Sql2oDbHandler;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.sql2o.Connection;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-
 
 /**
  * this is EditController.
@@ -19,7 +17,6 @@ public class EditController {
 
   @Autowired
   private Sql2oDbHandler sql2oDbHandler;
-
   @PostMapping("/deleteProduct")
   public String deleteData(@RequestBody Map params) {
     String id = params.get("id").toString();

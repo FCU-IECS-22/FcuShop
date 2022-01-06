@@ -2,16 +2,13 @@ package fcu.sep.fcushop.controller;
 
 import fcu.sep.fcushop.database.Sql2oDbHandler;
 import fcu.sep.fcushop.model.Product;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.sql2o.Connection;
-
-import java.util.Map;
-
 
 /**
  * This is class ManageController.
@@ -61,9 +58,7 @@ public class ManageController {
      */
     @PostMapping("/addFile")
      public String getNewData(HttpServletRequest request) {
-        System.out.println("addFile function");
-
-
+      System.out.println("addFile function");
       try (Connection connection = sql2oDbHandler.getConnector().open()) {
         String query = "insert into product (id,name,image_url,price,description)"
                         + "values(NULL,:name,:image_url,:price,:description)";
@@ -74,7 +69,6 @@ public class ManageController {
             .addParameter("description", request.getParameter("description"))
             .executeUpdate();
       }
-
       return "redirect:/index.html";
     }
 
@@ -105,8 +99,8 @@ public class ManageController {
       String id = params.get("id").toString();
 
       try (Connection connection = sql2oDbHandler.getConnector().open()) {
-            String query = "DELETE FROM product WHERE id = :id";
-            connection.createQuery(query)
+        String query = "DELETE FROM product WHERE id = :id";
+        connection.createQuery(query)
                 .addParameter("id", id)
                 .executeUpdate();
       }
