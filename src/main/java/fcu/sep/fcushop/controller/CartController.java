@@ -14,12 +14,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.sql2o.Connection;
 
+/**
+ * This is class CartController.
+ */
 @RestController
 @CrossOrigin
 public class CartController {
   @Autowired
     private Sql2oDbHandler sql2oDbHandler;
 
+  /**
+   * this is getProductsOfCart function.
+   ** @param params getCartData.
+   ** @return data in the dataBase.
+   */
   @PostMapping("/productsOfCart")
     public List<Product> getProductsOfCart(@RequestBody Map params) {
     ArrayList all = (ArrayList) params.get("cartItems");

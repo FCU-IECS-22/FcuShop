@@ -7,7 +7,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.sql2o.Connection;
 
@@ -53,7 +58,8 @@ public class AccountController {
      * @ return index.html;
      */
     @PostMapping("/login")
-    public String loginDetect(@ModelAttribute("account") Account data, RedirectAttributes redirectAttributes) {
+    public String loginDetect(@ModelAttribute("account") Account data,
+                              RedirectAttributes redirectAttributes) {
       System.out.println("data : " + data);
       System.out.println("ID : " + data.getId());
       System.out.println("UserName : " + data.getUsername());
@@ -77,6 +83,12 @@ public class AccountController {
       }
     }
 
+    /**
+     * This is signup.
+     ** @param data getAccount.
+     ** @return html.
+     */
+
     @PostMapping("/signUp")
     public String getNewAccountData(@ModelAttribute("account") Account data) {
       System.out.println("data : " + data);
@@ -85,7 +97,8 @@ public class AccountController {
       System.out.println("Password : " + data.getPassword());
 
       try (Connection connection = sql2oDbHandler.getConnector().open()) {
-        String query = "insert into account (ID,USERNAME,PASSWORD) values(NULL,:username,:password)";
+        String query = "insert into account (ID,USERNAME,PASSWORD) "
+                + "values(NULL,:username,:password)";
         connection.createQuery(query)
                     .addParameter("username", data.getUsername())
                     .addParameter("password", data.getPassword())

@@ -24,7 +24,8 @@ public class ModifyProduct {
   * @param description description.
   */
 
-  public ModifyProduct(long id, String oldName, String newName, String imageUrl, int price, String description) {
+  public ModifyProduct(long id, String oldName, String newName, String imageUrl, int price,
+                       String description) {
     this.id = id;
     this.oldName = oldName;
     this.newName = newName;

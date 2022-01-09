@@ -5,7 +5,10 @@ import fcu.sep.fcushop.model.Account;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.sql2o.Connection;
 
 /**
@@ -19,6 +22,11 @@ public class SignController {
   @Autowired
   private Sql2oDbHandler sql2oDbHandler;
 
+  /**
+   * this is createAccount function.
+   ** @param formData.
+   ** @return text.
+   */
   @PostMapping("/signUpp")
   public String createAccount(@RequestBody Map params) {
     String username = params.get("username").toString();
@@ -35,6 +43,11 @@ public class SignController {
     return data.getUsername();
   }
 
+  /**
+   * this is accountCheck function.
+   ** @param formData.
+   ** @return text.
+   */
   @PostMapping("/loginn")
   public String accountCheck(@RequestBody Map params) {
     String username = params.get("username").toString();

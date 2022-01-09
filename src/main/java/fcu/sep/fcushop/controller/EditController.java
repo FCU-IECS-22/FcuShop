@@ -2,9 +2,11 @@ package fcu.sep.fcushop.controller;
 
 import fcu.sep.fcushop.database.Sql2oDbHandler;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.sql2o.Connection;
 
 /**
@@ -17,6 +19,12 @@ public class EditController {
 
   @Autowired
   private Sql2oDbHandler sql2oDbHandler;
+
+  /**
+   * this is deleteProduct function.
+   ** @param params itemData.
+   ** @return text.
+   */
   @PostMapping("/deleteProduct")
   public String deleteData(@RequestBody Map params) {
     String id = params.get("id").toString();
@@ -30,6 +38,11 @@ public class EditController {
     return "Good Delete";
   }
 
+  /**
+   * this is getNewData function.
+   ** @param params itemData.
+   ** @return text.
+   */
   @PostMapping("/new")
   public String getNewData(@RequestBody Map params) {
 
@@ -52,6 +65,11 @@ public class EditController {
     return "Good Create";
   }
 
+  /**
+   * this is createProduct function.
+   ** @param params itemData.
+   ** @return text.
+   */
   @PostMapping("/edit")
   public String createProduct(@RequestBody Map params) {
 
